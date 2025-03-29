@@ -276,13 +276,18 @@ public class BinaryTreeSearch {
 
     public void findLeavesGreaterThan(TreeNodeInt node, List<Integer> resultList, int k) {
         if (node != null) {
-            if (node.getLeft() == null && node.getRight() == null) {
-                if (node.getValue() > k) {
-                    resultList.add(node.getValue());
-                } else {
-                    findLeavesGreaterThan(node.getRight(), resultList, k);
-                    findLeavesGreaterThan(node.getLeft(), resultList, k);
-                }
+            // Si el valor del nodo es mayor que K y es una hoja, agregamos su valor
+            if (node.getLeft() == null && node.getRight() == null && node.getValue() > k) {
+                resultList.add(node.getValue());
+            }
+
+            // Si el valor de la raíz es mayor que K, podemos ignorar el subárbol derecho
+            if (node.getValue() > k) {
+                findLeavesGreaterThan(node.getLeft(), resultList, k); // Recursión solo en el subárbol izquierdo
+            }
+            // Si el valor de la raíz es menor o igual a K, podemos ignorar el subárbol izquierdo
+            else {
+                findLeavesGreaterThan(node.getRight(), resultList, k); // Recursión solo en el subárbol derecho
             }
         }
     }
