@@ -1,4 +1,4 @@
-package ProgramacionIII.TP2;
+package ProgramacionIII.TP2_1_Arboles;
 
 public class TreeNodeInt {
     private Integer value;

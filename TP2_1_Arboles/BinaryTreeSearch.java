@@ -1,4 +1,4 @@
-package ProgramacionIII.TP2.1 - Arboles;
+package ProgramacionIII.TP2_1_Arboles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,13 @@ public class BinaryTreeSearch {
     public BinaryTreeSearch(TreeNodeInt root) {
         this.root = root;
     }
+    /* Ejercicio 1
+    Implemente la estructura de Árbol Binario para búsquedas.
 
+    Métodos:
+    • Integer getRoot(), boolean hasElem(Integer), boolean isEmpty(), void insert(Integer),
+    boolean delete(Integer), int getHeight(), void printPosOrder(), void printPreOrder(), void
+    printInOrder(), List getLongestBranch(), List getFrontera(), Integer getMaxElem(), List getElemAtLevel(int) */
     // Complejidad O(1), solo devuelve la raiz
     public Integer getRoot() {
         if (root == null) {
@@ -234,6 +240,49 @@ public class BinaryTreeSearch {
             } else {
                 getElemAtLevel(node.getLeft(), resultList, level, currentLevel + 1);
                 getElemAtLevel(node.getRight(), resultList, level, currentLevel + 1);
+            }
+        }
+    }
+
+    /* Ejercicio 2
+    Dado un árbol binario de búsquedas que almacena números enteros, implementar un algoritmo
+    que retorne la suma de todos los nodos internos del árbol. */
+    public int internalSumNodes() {
+        return internalSumNodes(this.root);
+    }
+
+    private int internalSumNodes(TreeNodeInt node) {
+        // Solo se suman los nodos que tienen al menos un hijo
+        if (node == null) {
+            return 0;
+        }
+        if (node.getLeft() == null && node.getRight() == null) {
+            return 0;
+        }
+        // Suma el valor del nodo actual
+        // Llama recursivamente los subarboles y suma los nodos internos
+        return node.getValue() + internalSumNodes(node.getLeft()) + internalSumNodes(node.getRight());
+    }
+
+    /* Ejercicio 3
+    Dado un árbol binario de búsqueda que almacena números enteros y un valor de entrada K, implementar un
+    algoritmo que permita obtener un listado con los valores de todas las hojas cuyo valor supere K. Por ejemplo,
+    para el árbol de la derecha, con un valor K = 8, el resultado debería ser [9, 11]. */
+    public List<Integer> findLeavesGreaterThan(int k) {
+        List<Integer> resultList = new ArrayList<Integer>();
+        findLeavesGreaterThan(this.root, resultList, k);
+        return resultList;
+    }
+
+    public void findLeavesGreaterThan(TreeNodeInt node, List<Integer> resultList, int k) {
+        if (node != null) {
+            if (node.getLeft() == null && node.getRight() == null) {
+                if (node.getValue() > k) {
+                    resultList.add(node.getValue());
+                } else {
+                    findLeavesGreaterThan(node.getRight(), resultList, k);
+                    findLeavesGreaterThan(node.getLeft(), resultList, k);
+                }
             }
         }
     }

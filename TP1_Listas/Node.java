@@ -1,4 +1,4 @@
-package ProgramacionIII.tp1;
+package ProgramacionIII.TP1_Listas;
 
 public class Node<T> {
 
