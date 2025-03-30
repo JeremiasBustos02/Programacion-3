@@ -41,6 +41,20 @@ public class BinaryTreeInt {
     }
 
     private void fillNodes(TreeNodeInt node) {
-        
+        if (node.getValue() == null) { // Solo llenamos nodos internos vacíos
+            int leftValue = 0;
+            int rightValue = 0;
+            if (node.getLeft() != null) {
+                fillNodes(node.getLeft());  // Recursión hacia la izquierda
+                leftValue = node.getLeft().getValue();
+            }
+            if (node.getRight() != null) {
+                fillNodes(node.getRight()); // Recursión hacia la derecha
+                rightValue = node.getRight().getValue();
+            }
+            node.setValue(rightValue - leftValue); // Calculamos el valor del nodo
+        }
     }
-    }
+
+
+}
